@@ -1,0 +1,10 @@
+flask
+SQLAlchemy
+Flask-SQLAlchemy
+Flask-Migrate
+flask-bcrypt
+flask-cors
+flask-socketio
+python-dotenv
+flask_jwt_extended
+kafka-python
