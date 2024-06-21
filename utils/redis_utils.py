@@ -16,8 +16,8 @@ class RedisClient:
         
     def is_token_blacklisted(self, jti) -> bool:
         exists = False
-        # try:
-        #     exists = self.cache.exists(jti) == 1
-        # except Exception:
-        #     ...
+        try:
+            exists = self.cache.exists(jti) == 1
+        except Exception:
+            ...
         return jti in self.BLACKLIST or exists
