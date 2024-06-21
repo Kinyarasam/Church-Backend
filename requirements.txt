@@ -7,4 +7,6 @@ flask-cors
 flask-socketio
 python-dotenv
 flask_jwt_extended
+Flask-Caching
 kafka-python
+redis
