@@ -7,6 +7,8 @@ flask-cors
 flask-socketio
 python-dotenv
 flask_jwt_extended
+flask_testing
 Flask-Caching
 kafka-python
 redis
+pytest
