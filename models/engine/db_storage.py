@@ -9,10 +9,12 @@ def Db(app):
 from models.base_model import Base
 from models.user import User
 from models.event import Event
+from models.chat import Message, ChannelMember, Channel
 
 
 classes = {
-    "User": User, "Event": Event
+    "User": User, "Event": Event, "Message": Message,
+    "ChannelMember": ChannelMember, "Channel": Channel,
 }
 
 
@@ -66,4 +68,7 @@ class DBStorage:
         Base.metadata.create_all(self._engine)
         session_factory = sessionmaker(bind=self._engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
-        self._session = Session
+        self._session = self.session = Session
+    
+    def drop_all(self):
+        Base.metadata.drop_all(self._engine)
