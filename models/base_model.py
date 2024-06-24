@@ -7,7 +7,7 @@ from uuid import uuid4
 
 
 Base = sqlalchemy.orm.declarative_base()
-t_format = "%Y-%m-%dT%H:%M:%S%z"
+t_format = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class BaseModel:
@@ -16,7 +16,6 @@ class BaseModel:
     updated_at = Column(DATETIME, nullable=False, default=datetime.now())
 
     def __init__(self, *args, **kwargs):
-        print(kwargs)
         if kwargs:
             for key, val in kwargs.items():
                 if type(val) == datetime:
@@ -49,7 +48,10 @@ class BaseModel:
 
     def to_dict(self, save_fs=None):
         new_dict = self.__dict__.copy()
-
+        new_dict['__class__'] = self.__class__.__name__
+        for key in new_dict.keys():
+            if isinstance(new_dict[key], datetime):
+                new_dict[key] = new_dict[key].strftime(t_format)
         if '_sa_instance_state' in new_dict:
             del new_dict['_sa_instance_state']
         if save_fs is None:

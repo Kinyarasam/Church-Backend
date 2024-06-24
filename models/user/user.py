@@ -8,10 +8,12 @@ bcrypt = Bcrypt()
 class User(BaseModel, Base):
     __tablename__ = "users"
 
-    email = Column(String(60))
+    email = Column(String(60), unique=True, nullable=False)
+    first_name = Column(Text)
+    last_name = Column(Text)
     phone_number = Column(String(12))
     password = Column(Text)
-    role = Column(String(60))
+    role = Column(String(60), nullable=False, default="basic")
 
     def __setattr__(self, __name, __value):
         ROLES = ["basic", "user", "admin", "super_admin"]
